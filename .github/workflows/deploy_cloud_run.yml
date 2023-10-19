@@ -30,7 +30,7 @@ jobs:
 
   DeployStaging:
     name: Deploy to Staging
-    if: github.event.ref == 'refs/heads/staging'
+    if: github.event_name == 'push' && github.event.ref == 'refs/heads/staging'
     needs: [Build]
     runs-on: ubuntu-latest
     environment:
