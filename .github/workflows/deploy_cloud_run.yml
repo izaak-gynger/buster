@@ -45,7 +45,7 @@ jobs:
 
   DeployProd:
     name: Deploy to Production
-    if: github.event_name == 'push' && ${{ contains(github.ref, 'main') }}
+    if:  ${{ github.event_name == 'push' && contains(github.ref, 'main') }}
     needs: [DeployStaging]
     runs-on: ubuntu-latest
     environment:
