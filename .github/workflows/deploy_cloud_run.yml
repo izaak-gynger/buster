@@ -6,6 +6,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: ci-deploy-${{ github.ref }}-1
+  cancel-in-progress: true
+
 jobs:
   Build:
     runs-on: ubuntu-latest
