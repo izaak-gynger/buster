@@ -22,7 +22,7 @@ jobs:
 
   DeployDev:
     name: Deploy to Dev
-    if: github.event_name == 'pull_request' && ${{ !(contains(github.ref, 'main') || contains(github.ref, 'staging')) }}
+    if: github.event_name == 'pull_request' || ${{ !(contains(github.ref, 'main') || contains(github.ref, 'staging')) }}
     needs: [Build]
     runs-on: ubuntu-latest
     environment:
