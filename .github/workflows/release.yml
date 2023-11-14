@@ -1,0 +1,22 @@
+name: release
+
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: ci-deploy-${{ github.ref }}-1
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Release latest to Production
+    if: ${{ github.event_name == 'push' && contains(github.ref, 'main') }}
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: 'http://www.app.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo I am deploying!
