@@ -10,13 +10,12 @@ concurrency:
 
 jobs:
   release:
-    name: Release latest to Production
-    if: ${{ github.event_name == 'push' && contains(github.ref, 'main') }}
-    needs: [Build]
     runs-on: ubuntu-latest
     environment:
       name: Production
       url: 'http://www.app.myapp.com'
     steps:
-      - name: Deploy
-        run: echo I am deploying!
+      - uses: actions/checkout@v3
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
